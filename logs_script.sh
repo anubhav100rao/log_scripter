@@ -30,7 +30,6 @@ for ((i = 1; i <= $lineCount; i++)); do
     method=${words[6]}
     method=${method:1}
     ipAddress=${words[1]}
-    echo "$i -> $method"
 
     # insertion logic for map
     if [ -z ${methodCount[$method]} ]; then

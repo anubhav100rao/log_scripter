@@ -8,6 +8,8 @@ else
     echo "Directory does not exist"
     exit 1
 fi
+# create a set to store the extension of files
+extensions=("py", "cpp", "sh")
 
 declare -A fileExtensionCount
 
@@ -20,9 +22,6 @@ for file in $(find $directoryPath -type f -not -path '*/\.*'); do
     fi
 done
 
-extension="py"
-echo "$extension files: ${fileExtensionCount[$extension]}"
-
-for key in "${fileExtensionCount[@]}"; do
+for key in "${extensions[@]}"; do
     echo "Extension: $key, Count: ${fileExtensionCount[$key]}"
 done
