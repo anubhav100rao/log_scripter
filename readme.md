@@ -1,1 +1,1 @@
-# Drawing insights from the data using bash script
+# Drawing insights from logs using bash script
