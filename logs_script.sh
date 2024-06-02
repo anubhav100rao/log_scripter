@@ -30,28 +30,37 @@ for ((i = 1; i <= $lineCount; i++)); do
     method=${words[6]}
     method=${method:1}
     ipAddress=${words[1]}
+    echo "$i -> $method"
 
+    # insertion logic for map
     if [ -z ${methodCount[$method]} ]; then
-        methodCount[$method]=0
+        methodCount[$method]=1
     else
         methodCount[$method]=$((${methodCount[$method]} + 1))
     fi
 
+    # ip address
     if [ -z ${ipAddressCount[$ipAddress]} ]; then
         ipAddressCount[$ipAddress]=0
     else
         ipAddressCount[$ipAddress]=$((${ipAddressCount[$ipAddress]} + 1))
     fi
 
+    # find most frequent ip address
     if [ ${ipAddressCount[$ipAddress]} -gt $max ]; then
         max=${ipAddressCount[$ipAddress]}
         maxIpAddress=$ipAddress
     fi
 
+    # counting success http code
     http_status=${words[9]}
     if [ $http_status -ge 200 ] && [ $http_status -lt 300 ]; then
         success_http_code_count=$(($success_http_code_count + 1))
     fi
+done
+
+for method in "${methods[@]}"; do
+    echo "$method: ${methodCount[$method]}"
 done
 
 echo "Total number of request $lineCount"
